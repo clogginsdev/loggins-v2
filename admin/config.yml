@@ -328,6 +328,16 @@ collections:
             label: Text
             name: '-1ed6dcc'
             widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved, key: 556d64d8
+            label: Text
+            name: 556d64d8
+            widget: string
           - hint: 'Original text: I''m Chris Loggins, key: -941b48f'
             label: Text
             name: '-941b48f'
@@ -381,16 +391,6 @@ collections:
               key: 34a2cc3f
             label: Text
             name: 34a2cc3f
-            widget: string
-          - hint: 'Original text: Page Not Found, key: -40b0787c'
-            label: Text
-            name: '-40b0787c'
-            widget: string
-          - hint: >-
-              Original text: The page you are looking for doesn't exist or has
-              been moved, key: 556d64d8
-            label: Text
-            name: 556d64d8
             widget: string
           - hint: 'Original text: Java Real Estate, key: -216518d0'
             label: Text
