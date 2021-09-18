@@ -1,0 +1,942 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: 'Original text: Work, key: 293b31'
+            label: Text
+            name: 293b31
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: >-
+              Original text: Crafting solutions for the modern web, key:
+              4866cb5d
+            label: Text
+            name: 4866cb5d
+            widget: string
+          - hint: >-
+              Original text: Your website is important to your success. It needs
+              to let visitors know the quality of your brand and products.
+              That’s where I come in., key: 41455259
+            label: Text
+            name: '41455259'
+            widget: text
+          - hint: 'Original text: LET''S TALK, key: 30c198e5'
+            label: Text
+            name: 30c198e5
+            widget: string
+          - hint: 'Original text: What I will do for you, key: -237c552'
+            label: Text
+            name: '-237c552'
+            widget: string
+          - hint: >-
+              Original text: This is the core of what I do for your brand., key:
+              a98b550
+            label: Text
+            name: a98b550
+            widget: string
+          - hint: 'Original text: Design, key: 79ceadde'
+            label: Text
+            name: 79ceadde
+            widget: string
+          - hint: >-
+              Original text: Your overall visuals are important to potential
+              customers, so I will provide you with a design that people will
+              suit your brand and please existing and potential customers., key:
+              1b1320a0
+            label: Text
+            name: 1b1320a0
+            widget: text
+          - hint: 'Original text: Build, key: 3d8d64e'
+            label: Text
+            name: 3d8d64e
+            widget: string
+          - hint: >-
+              Original text: Sometimes people have a great idea, but don’t have
+              the technical skill to execute it. In other cases, you have a
+              design but can’t code. Leave the execution to me., key: bd5fc83
+            label: Text
+            name: bd5fc83
+            widget: text
+          - hint: 'Original text: Support, key: -b54e851'
+            label: Text
+            name: '-b54e851'
+            widget: string
+          - hint: >-
+              Original text: A lot of business owners have advisors, but for
+              their business needs not for their digital product or website. I
+              am the person who will advise you in your digital space., key:
+              43a0e4a4
+            label: Text
+            name: 43a0e4a4
+            widget: text
+          - hint: 'Original text: VAAYS (2021), key: -77eec6cc'
+            label: Text
+            name: '-77eec6cc'
+            widget: string
+          - hint: 'Original text: Brand Design / Webflow Development, key: 25f3043'
+            label: Text
+            name: 25f3043
+            widget: string
+          - hint: 'Original text: View case study, key: -75ff5aec'
+            label: Text
+            name: '-75ff5aec'
+            widget: string
+          - hint: 'Original text: Sef McCullough (2021), key: bb0f269'
+            label: Text
+            name: bb0f269
+            widget: string
+          - hint: 'Original text: Website Design / Webflow Development, key: -72d6451'
+            label: Text
+            name: '-72d6451'
+            widget: string
+          - hint: 'Original text: Java Real Estate(2021), key: -b2a392c'
+            label: Text
+            name: '-b2a392c'
+            widget: string
+          - hint: 'Original text: Let''s Start Talking, key: 565249bf'
+            label: Text
+            name: 565249bf
+            widget: string
+          - hint: >-
+              Original text: I want you to tell me what you want so I can give
+              you what you need., key: 4f9f18d7
+            label: Text
+            name: 4f9f18d7
+            widget: string
+          - hint: 'Original text: Name, key: 24eeab'
+            label: Text
+            name: 24eeab
+            widget: string
+          - hint: 'Original text: Email Address, key: -2b7010d0'
+            label: Text
+            name: '-2b7010d0'
+            widget: string
+          - hint: 'Original text: Project Budget, key: -5a1f7994'
+            label: Text
+            name: '-5a1f7994'
+            widget: string
+          - hint: 'Original text: Project Budget (Select one), key: -47dbd0ed'
+            label: Text
+            name: '-47dbd0ed'
+            widget: string
+          - hint: 'Original text: $3,000 - $5,000, key: 72dd2fd5'
+            label: Text
+            name: 72dd2fd5
+            widget: string
+          - hint: 'Original text: $5,000 - $8,000, key: 36c30996'
+            label: Text
+            name: 36c30996
+            widget: string
+          - hint: 'Original text: $8,000+, key: -2d8db1ed'
+            label: Text
+            name: '-2d8db1ed'
+            widget: string
+          - hint: 'Original text: Message, key: -63dc6819'
+            label: Text
+            name: '-63dc6819'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: Made with determination by Chris., key: -1ed6dcc'
+            label: Text
+            name: '-1ed6dcc'
+            widget: string
+          - hint: 'Original text: I''m Chris Loggins, key: -941b48f'
+            label: Text
+            name: '-941b48f'
+            widget: string
+          - hint: >-
+              Original text: I'm a Digital Designer and Webflow Developer based
+              in Chicago, IL. Currently a Webflow Developer at Crafted Studios.,
+              key: 4804bb53
+            label: Text
+            name: 4804bb53
+            widget: text
+          - hint: 'Original text: Download my resume, key: -67a7b857'
+            label: Text
+            name: '-67a7b857'
+            widget: string
+          - hint: "Original text: I grew up in the foster care system and I didn’t have friends for the vast majority of my childhood, so I searched for something that could help me disconnect. Being naturally curious about how something is made, I decided I was going to figure out this: how are websites made? That is how I started my design journey at age eight; \_by age fifteen I had my first job as web designer for New Images Design Agency. Nowadays I'm a digital designer who loves creating for both large and small brands alike., key: -46fbdea"
+            label: Text
+            name: '-46fbdea'
+            widget: text
+          - hint: 'Original text: Have you always used Webflow?, key: -6c88cc38'
+            label: Text
+            name: '-6c88cc38'
+            widget: string
+          - hint: >-
+              Original text: No, I have spent the vast majority of my career
+              coding WordPress websites for my clients. When I started to
+              freelance more, I realized that WordPress was overkill for the
+              average project I was getting. My search for something more
+              efficient kept leading me to Webflow. Admittedly, I had learned
+              Webflow and even taught other designers how to use it, but I
+              didn’t become a Webflow customer until I was transitioning out of
+              my agency job. Now, I use Webflow for just about all my projects.,
+              key: -28fc59b0
+            label: Text
+            name: '-28fc59b0'
+            widget: text
+          - hint: 'Original text: What do you do outside design?, key: 45c31bcb'
+            label: Text
+            name: 45c31bcb
+            widget: string
+          - hint: "Original text: There are a lot of things I do outside of design. I enjoy singing, gaming, binge watching Hunter x Hunter, and connecting with people on Twitter. I have a passion for helping others achieve their creations, so I do invest some time on the Webflow forums to help out when I can. \_, key: -1111af0e"
+            label: Text
+            name: '-1111af0e'
+            widget: text
+          - hint: 'Original text: Ready for success?, key: 65151990'
+            label: Text
+            name: '65151990'
+            widget: string
+          - hint: >-
+              Original text: I am ready to put your brand on the right path.,
+              key: 34a2cc3f
+            label: Text
+            name: 34a2cc3f
+            widget: string
+          - hint: 'Original text: Page Not Found, key: -40b0787c'
+            label: Text
+            name: '-40b0787c'
+            widget: string
+          - hint: >-
+              Original text: The page you are looking for doesn't exist or has
+              been moved, key: 556d64d8
+            label: Text
+            name: 556d64d8
+            widget: string
+          - hint: 'Original text: Java Real Estate, key: -216518d0'
+            label: Text
+            name: '-216518d0'
+            widget: string
+          - hint: >-
+              Original text: Java Real Estate specializes in developing and
+              investing in properties. The company's work has been successful
+              over in turning low value properties into high value returns.,
+              key: ff2dcb
+            label: Text
+            name: ff2dcb
+            widget: text
+          - hint: 'Original text: Getting it right, key: 33e0e063'
+            label: Text
+            name: 33e0e063
+            widget: string
+          - hint: >-
+              Original text: Mr. Small had been trying for years to get a
+              website up and running, but often found himself getting caught in
+              the day-to-day responsibilities of operating his business or was
+              frustrated with lack of knowledge on how to achieve results he
+              wanted. After working together over the course of several weeks,
+              we went through countless mockups and content revisions until
+              finally landing on something that stuck. During the middle of the
+              design phase, Mr.Small decided to rebrand when he aquired a new
+              business partner: his son! I went back to the drawing board and
+              worked tirelessly until I came up with a design they both liked.
+              See the progress., key: 3a164006
+            label: Text
+            name: 3a164006
+            widget: text
+          - hint: 'Original text: A need for control, key: 16b5e27b'
+            label: Text
+            name: 16b5e27b
+            widget: string
+          - hint: >-
+              Original text: Orginally, the website was build in WordPress, but
+              Mr.Small was not as tech-savvy as his son and wanted to be able to
+              edit the site on his own. After looking through various options,
+              we decided that building in Webflow would be the best way to go
+              about this. Not only did this make editing the site easy for
+              Mr.Small, but he no longer had to worry about finding a hosting
+              service or platform updates., key: 60a3d43e
+            label: Text
+            name: 60a3d43e
+            widget: text
+          - hint: 'Original text: View the live site, key: -2e6f3d0f'
+            label: Text
+            name: '-2e6f3d0f'
+            widget: string
+          - hint: 'Original text: Sef McCullough, key: -11e08705'
+            label: Text
+            name: '-11e08705'
+            widget: string
+          - hint: >-
+              Original text: As one of the most knowledgeable designers in the
+              photo retouching space, Sef McCullough is now looking to share his
+              knowledge with younger designers., key: -2aac0e48
+            label: Text
+            name: '-2aac0e48'
+            widget: text
+          - hint: 'Original text: The Design''s Direction, key: -39f5a188'
+            label: Text
+            name: '-39f5a188'
+            widget: string
+          - hint: >-
+              Original text: When we went back over our findings with one
+              another, Sef agreed more often than not and provided ideas and
+              inspiration that would drive forward the process! Sef has two
+              logos, one for the homepage and the other for the rest of the
+              website. The logo is a play on Sef's Visualist brand which
+              showcases knowledge and inspiration in an accessible manner to
+              audiences all across YouTube. It features bold colors that are
+              also easy to see at any size or distance from computer screen-
+              perfect!, key: 30b1d01d
+            label: Text
+            name: 30b1d01d
+            widget: text
+          - hint: 'Original text: Goodbye Squarespace, key: f6fb53a'
+            label: Text
+            name: f6fb53a
+            widget: string
+          - hint: >-
+              Original text: Sef wanted more control and functionality for the
+              money he was paying. As a designer, I agreed that Squarespace
+              wasn't providing those things so we decided to do something about
+              it - his site would be built with Webflow! The interface is easy
+              enough for Sef to have complete control over his site while also
+              being able to extend its function as needed without losing
+              anything in quality or importance of information on any one page.,
+              key: -126499d9
+            label: Text
+            name: '-126499d9'
+            widget: text
+          - hint: 'Original text: Loggins v2 Style Guide, key: -2f2d3ea2'
+            label: Text
+            name: '-2f2d3ea2'
+            widget: string
+          - hint: >-
+              Original text: These are the styles to be used across the website
+              for consistency. These include colors, typography, and spacers.
+              Any additional styles are to be included here and documented.,
+              key: a1635b1
+            label: Text
+            name: a1635b1
+            widget: text
+          - hint: 'Original text: Heading, key: -6d5fea1e'
+            label: Text
+            name: '-6d5fea1e'
+            widget: string
+          - hint: 'Original text: VAAYS Virtual Assistants, key: 5e64d35a'
+            label: Text
+            name: 5e64d35a
+            widget: string
+          - hint: >-
+              Original text: VAAYS Virtual Assistants provides quality
+              assistants to business owners. Founded in 2005, the company has
+              grown into one of the top VA providers in their area., key:
+              -6aaab597
+            label: Text
+            name: '-6aaab597'
+            widget: text
+          - hint: 'Original text: The New Brand Look, key: 5f7d4227'
+            label: Text
+            name: 5f7d4227
+            widget: string
+          - hint: >-
+              Original text: With a business on the rise, VAAYS was in need of
+              an updated identity. The goal for this project was to create
+              feelings of quality and trustworthiness while adding just enough
+              modernity to fit with their message that they help clients do more
+              without stressing as much about it. Blue and green were chosen as
+              the main colors because these are synced with both their mission
+              statement- which is "to make businesses grow by doing less." The
+              yellow helps you get your attention. The checkmark, while not a
+              logo in the traditional sense, drove home the point of 'checking
+              things off your list' and lowercase type added to that
+              approachable feel., key: -50887129
+            label: Text
+            name: '-50887129'
+            widget: text
+          - hint: >-
+              Original text: The VAAYS team had a clear vision for their
+              website. They wanted something modern and simple, so we went
+              through idea after idea to make sure they were happy with the end
+              product. After testing all of our ideas together as a group, I
+              came up with an elegant design that everyone was pleased about -
+              finally, just in time for development., key: 6a5e4404
+            label: Text
+            name: 6a5e4404
+            widget: text
+          - hint: 'Original text: Two Great Technologies, key: 1103a811'
+            label: Text
+            name: 1103a811
+            widget: string
+          - hint: >-
+              Original text: VAAYS originally built their website on Wix, but
+              they soon realized that it wouldn't cut for the backend
+              functionality that they wanted. They also needed to integrate
+              certain apps on their backend that would be native to their
+              website’s platform. What was their solution? I developed a
+              WordPress site in Webflow using the Udesly Adapter. This allowed
+              VAAYS to use some of the technologies from back end while
+              retaining ease of content management with Webflow., key: -7b48efe6
+            label: Text
+            name: '-7b48efe6'
+            widget: text
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: 'Original link: /about, key: 55b8e8be'
+            label: Link
+            name: 55b8e8be
+            widget: string
+          - hint: 'Original link: https://loggins.cc/#work, key: 70670337'
+            label: Link
+            name: '70670337'
+            widget: string
+          - hint: 'Original link: https://loggins.cc/#contact, key: 417fae3a'
+            label: Link
+            name: 417fae3a
+            widget: string
+          - hint: 'Original link: #contact, key: 6c80469d'
+            label: Link
+            name: 6c80469d
+            widget: string
+          - hint: 'Original link: /project/vaays, key: -11fff995'
+            label: Link
+            name: '-11fff995'
+            widget: string
+          - hint: 'Original link: /project/sef-mccullough, key: 60dc250d'
+            label: Link
+            name: 60dc250d
+            widget: string
+          - hint: 'Original link: /project/java-real-estate, key: -2045796b'
+            label: Link
+            name: '-2045796b'
+            widget: string
+          - hint: 'Original link: https://dribbble.com/chrisloggins/, key: -5f26b252'
+            label: Link
+            name: '-5f26b252'
+            widget: string
+          - hint: 'Original link: https://behance.net/chrisloggins/, key: -c198340'
+            label: Link
+            name: '-c198340'
+            widget: string
+          - hint: 'Original link: https://twitter.com/chrsloggins/, key: 1ece5742'
+            label: Link
+            name: 1ece5742
+            widget: string
+          - hint: >-
+              Original link:
+              https://www.linkedin.com/in/christopher-loggins-142b44201/, key:
+              -4619f667
+            label: Link
+            name: '-4619f667'
+            widget: string
+          - hint: >-
+              Original link: /assets/documents/resume-christopher-loggins.pdf,
+              key: 1dc6afad
+            label: Link
+            name: 1dc6afad
+            widget: string
+          - hint: 'Original link: https://javareal.net, key: -37f5be42'
+            label: Link
+            name: '-37f5be42'
+            widget: string
+          - hint: 'Original link: https://sef-mccullough.webflow.io, key: -3936d697'
+            label: Link
+            name: '-3936d697'
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 3b4057dd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5f4a0c8f'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7f1526ea'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-4842df8e'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-7ee54a90'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-736e7ded'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 65aee291
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3e89ec57
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 10bd15ab
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 73e53e3c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 50c6f78c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 61fe1fe4
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '63044e27'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 752c5759
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 59fcab50
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 41c6ebe5
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3e5a0ffd
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 49520a7d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1cf93671'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-75b27606'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 1e56e196
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 273ec05b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 274cd7dc
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
