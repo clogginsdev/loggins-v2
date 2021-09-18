@@ -441,6 +441,7 @@ p {
   padding-bottom: 140px;
   border: 1px none #000;
   background-color: #132b54;
+  color: #d3d8e7;
 }
 
 .textarea::-webkit-input-placeholder {
