@@ -37,6 +37,7 @@ body {
 	border: 1px solid black;
 	border-radius: 50px;
 	margin: 5px;
+	pointer: cursor;
 }
 
 .employment-list {
