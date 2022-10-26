@@ -1,0 +1,45 @@
+html {
+	scroll-behavior: initial;
+}
+
+html,
+body {
+	width: 100%;
+	min-height: 100%;
+}
+
+.portfolio-items {
+	position: relative;
+	max-width: 1700px;
+}
+
+.cms-slider {
+	display: flex;
+	overflow: hidden;
+}
+
+.slide-item {
+	max-width: 33.33%;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.arrows {
+	width: 120px;
+	margin-top: 1.5rem;
+	display: flex;
+}
+
+.prev,
+.next {
+	width: 48px;
+	height: 48px;
+	border: 1px solid black;
+	border-radius: 50px;
+	margin: 5px;
+}
+
+.employment-list {
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
